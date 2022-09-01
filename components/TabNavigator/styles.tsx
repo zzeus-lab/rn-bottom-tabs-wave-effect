@@ -1,10 +1,11 @@
 import styled from "styled-components/native";
 import { Animated } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import IndicatorSvg from "../../assets/icons";
 
 export const Container = styled.View`
   flex-direction: row;
-  background-color: black;
+  background-color: tomato;
   height: 84px;
   width: 100%;
   padding: 16px 0;
@@ -25,25 +26,19 @@ export const TabItem = styled.TouchableOpacity`
   flex: 1;
 `;
 
-export const ItemIcon = styled(FontAwesome).attrs((props) => ({
-  width: 24,
-  height: 24,
-  fill: props.active ? "black" : "white",
-}))`
+export const ItemIcon = styled(FontAwesome).attrs(
+  (props: { active?: boolean }) => ({
+    size: 24
+  })
+)`
   margin-bottom: 8px;
 `;
 
-export const Indicator = styled(Icon).attrs({
-  icon: "indicator",
+export const Indicator = styled(IndicatorSvg).attrs({
   width: 92,
   height: 114,
-})`
-  ${(props) =>
-    props.minHeight &&
-    `
-    transform : translateY(20px);
-  `}
-`;
+  fill: "tomato"
+})``;
 
 export const IndicatorCircle = styled(Animated.View)`
   width: 56px;
@@ -51,5 +46,5 @@ export const IndicatorCircle = styled(Animated.View)`
   border-radius: 56px;
   background-color: white;
   position: absolute;
-  top: ${(props) => (props.minHeight ? "24px" : "8px")};
+  top: ${(props: { minHeight?: number }) => (props.minHeight ? "24px" : "8px")};
 `;
