@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { Animated } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import IndicatorSvg from "../../assets/icons";
+import IndicatorSvg from "../../assets/icons/indicator";
 
 export const Container = styled.View`
   flex-direction: row;

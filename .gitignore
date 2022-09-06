@@ -31,4 +31,5 @@ local.properties
 
 # Expo
 .expo/*
+.expo-shared/
 web-build/
