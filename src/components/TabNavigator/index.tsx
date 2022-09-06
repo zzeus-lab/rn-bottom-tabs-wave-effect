@@ -1,9 +1,8 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import React, { useEffect, useRef } from "react";
 import { Animated, View, Dimensions } from "react-native";
-import { MonoText } from "../StyledText";
-import iconMap from "./tabIcons";
 
+import { MonoText } from "../StyledText";
 import * as S from "./styles";
 import tabIcons from "./tabIcons";
 
@@ -15,10 +14,9 @@ const isMinHeight = height <= MIN_HEIGHT;
 export default function TabNavigation({
   state,
   descriptors,
-  navigation
+  navigation,
 }: BottomTabBarProps) {
   const translateX = useRef(new Animated.Value(0)).current;
-  const dimension = useRef(new Animated.Value(0)).current;
   const iconY = useRef(new Animated.Value(0)).current;
   const tabWidth = width / state.routes.length;
 
@@ -26,14 +24,14 @@ export default function TabNavigation({
     Animated.spring(translateX, {
       toValue: index * tabWidth,
       useNativeDriver: true,
-      speed: 2
+      speed: 2,
     }).start();
 
     iconY.setValue(0);
     Animated.timing(iconY, {
       toValue: isMinHeight ? -16 : -20,
       duration: 500,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   };
 
@@ -53,14 +51,11 @@ export default function TabNavigation({
           height: 114,
           justifyContent: "flex-start",
           alignItems: "center",
-          transform: [{ translateX }]
+          transform: [{ translateX }],
         }}
       >
         <S.Indicator deviceMinHieght={isMinHeight} />
-        <S.IndicatorCircle
-          deviceMinHieght={isMinHeight}
-          style={{ transform: [{ scale: dimension }] }}
-        />
+        <S.IndicatorCircle deviceMinHieght={isMinHeight} />
       </Animated.View>
 
       {state.routes.map((route, index: number) => {
@@ -72,7 +67,7 @@ export default function TabNavigation({
               const event = navigation.emit({
                 type: "tabPress",
                 target: route.key,
-                canPreventDefault: true
+                canPreventDefault: true,
               });
               if (state.index !== index && !event.defaultPrevented)
                 navigation.navigate(route.name);
